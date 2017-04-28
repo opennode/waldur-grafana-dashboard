@@ -781,7 +781,7 @@
             }
           ],
           "thresholds": "",
-          "title": "Storage",
+          "title": "Block Storage",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -830,9 +830,14 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Consumed",
+              "zindex": 2
+            }
+          ],
           "span": 4,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -958,9 +963,14 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Consumed",
+              "zindex": 1
+            }
+          ],
           "span": 4,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -1086,9 +1096,14 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Consumed",
+              "zindex": 1
+            }
+          ],
           "span": 4,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -1385,6 +1400,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "datasource": "${DS_PLAYGROUND}",
+          "decimals": 1,
           "format": "decmbytes",
           "gauge": {
             "maxValue": 100,
@@ -1586,9 +1602,14 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Consumed",
+              "zindex": 1
+            }
+          ],
           "span": 6,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -1714,9 +1735,14 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Consumed",
+              "zindex": 1
+            }
+          ],
           "span": 6,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -1854,9 +1880,14 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Consumed",
+              "zindex": 1
+            }
+          ],
           "span": 6,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -1982,9 +2013,14 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "alias": "Consumed",
+              "zindex": 1
+            }
+          ],
           "span": 6,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
@@ -2101,8 +2137,8 @@
     "list": []
   },
   "time": {
-    "from": "2017-03-02T20:40:38.378Z",
-    "to": "2017-04-21T21:44:52.397Z"
+    "from": "2017-02-01T15:50:32.286Z",
+    "to": "2017-03-03T20:58:27.811Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2131,5 +2167,5 @@
   },
   "timezone": "browser",
   "title": "Playground",
-  "version": 10
+  "version": 20
 }
