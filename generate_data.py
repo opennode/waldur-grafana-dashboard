@@ -6,11 +6,21 @@ from dateutil.relativedelta import relativedelta
 from influxdb import InfluxDBClient
 
 
-def get_points():
-    now = datetime.datetime.now()
+providers = ('east-farm', 'west-farm', 'north-farm', 'south-farm')
+resource_types = ('vm', 'vpc', 'volume', 'snapshot')
+
+
+def get_timestamps(count):
     points = []
-    for i in range(200):
-        timestamp = now - relativedelta(days=i)
+    now = datetime.datetime.now()
+    for i in range(count):
+        points.append(now - relativedelta(days=i))
+    return points
+
+
+def get_instances_by_state():
+    points = []
+    for timestamp in get_timestamps(200):
         states = {
             'erred': random.randint(1, 5),
             'online': random.randint(1, 20),
@@ -29,12 +39,17 @@ def get_points():
                     'count': count,
                 }
             })
+    return points
 
+
+def get_openstack_quotas():
+    points = []
+    for timestamp in get_timestamps(200):
         vcpu_usage = random.randint(1, 200)
         vcpu_limit = vcpu_usage + random.randint(1, 200)
 
         ram_usage = vcpu_usage * 1024 * random.randint(1, 3)
-        ram_limit = ram_usage + random.randint(1, 200*1024)
+        ram_limit = ram_usage + random.randint(1, 200 * 1024)
 
         volumes_usage = vcpu_usage + random.randint(1, 200)
         volumes_limit = volumes_usage + random.randint(1, 200)
@@ -86,7 +101,56 @@ def get_points():
                     'usage': quotas_map['%s_usage' % name],
                 }
             })
+    return points
 
+
+def get_total_cost():
+    points = []
+
+    for timestamp in get_timestamps(200):
+        for provider in providers:
+            points.append({
+                'measurement': 'total_cost',
+                'time': timestamp,
+                'tags': {
+                    'provider': provider,
+                },
+                'fields': {
+                    'value': random.randint(500, 1000)
+                }
+            })
+    return points
+
+
+def get_events():
+    points = []
+    i = 0
+    for timestamp in get_timestamps(200):
+        if random.randint(1, 12) < 4:
+            i += 1
+            provider = random.choice(providers)
+            resource_type = random.choice(resource_types)
+            points.append({
+                'measurement': 'events',
+                'time': timestamp,
+                'tags': {
+                    'title': 'Resource #%d created' % i,
+                    'tags': ','.join([provider, resource_type])
+                },
+                'fields': {
+                    'value': 0
+                }
+            })
+    return points
+
+
+def get_points():
+    points = []
+    points.extend(get_instances_by_state())
+    points.extend(get_openstack_quotas())
+    points.extend(get_total_cost())
+    points.extend(get_events())
+    print points
     return points
 
 
