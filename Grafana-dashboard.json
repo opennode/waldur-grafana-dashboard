@@ -140,11 +140,17 @@
                   },
                   {
                     "params": [],
-                    "type": "sum"
+                    "type": "max"
                   }
                 ]
               ],
-              "tags": []
+              "tags": [
+                {
+                  "key": "state",
+                  "operator": "=",
+                  "value": "total"
+                }
+              ]
             }
           ],
           "thresholds": "",
@@ -2337,5 +2343,5 @@
   },
   "timezone": "browser",
   "title": "Waldur Resources",
-  "version": 3
+  "version": 5
 }
