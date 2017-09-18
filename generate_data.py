@@ -144,13 +144,45 @@ def get_events():
     return points
 
 
+def get_slurm_usage():
+    points = []
+    for timestamp in get_timestamps(200):
+        cpu_usage = random.randint(1, 200)
+        gpu_usage = random.randint(1, 200)
+        ram_usage = cpu_usage * 1024 * random.randint(1, 3)
+        points.extend([
+            {
+                'measurement': 'slurm_cpu_usage',
+                'time': timestamp,
+                'fields': {
+                    'value': cpu_usage,
+                }
+            },
+            {
+                'measurement': 'slurm_gpu_usage',
+                'time': timestamp,
+                'fields': {
+                    'value': gpu_usage,
+                }
+            },
+            {
+                'measurement': 'slurm_ram_usage',
+                'time': timestamp,
+                'fields': {
+                    'value': ram_usage,
+                }
+            },
+        ])
+    return points
+
+
 def get_points():
     points = []
     points.extend(get_instances_by_state())
     points.extend(get_openstack_quotas())
     points.extend(get_total_cost())
     points.extend(get_events())
-    print points
+    points.extend(get_slurm_usage())
     return points
 
 
